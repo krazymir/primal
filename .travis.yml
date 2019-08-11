@@ -1,0 +1,36 @@
+language: generic 
+sudo: required
+services:
+    - docker
+
+before_install:
+  - docker build -t krazymir/react-app -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true krazymir/react-app npm run test
+
+after_success:
+  - docker build -t krazymir/primal-client ./client
+  - docker build -t krazymir/primal-nginx ./nginx
+  - docker build -t krazymir/primal-server ./server
+  - docker build -t krazymir/primal-worker ./worker
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID"  --password-stdin
+  
+  - docker push krazymir/primal-client
+  - docker push krazymir/primal-nginx
+  - docker push krazymir/primal-server
+  - docker push krazymir/primal-worker
+
+# deploy:
+#   provider: elasticbeanstalk
+#   region: "us-east-2"
+#   app: "Docker-react"
+#   env: "DockerReact-env"
+#   bucket_name: "elasticbeanstalk-us-east-2-730503576789"
+#   bucket_path: "Docker-react"
+#   on:
+#     branch: master
+#   access_key_id: $AWS_ID
+#   secret_access_key:
+#     secure: "$AWS_KEY"
