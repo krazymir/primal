@@ -15,7 +15,10 @@ function primeCalc(index) {
     while(primes.length < index) {
         let numIsPrime = true;
         for(let i = 1; i < primes.length; i++){
-            if (num % primes[i] == 0){
+            if (num / primes[i] < 3) {
+                break;
+            }
+            if (num % primes[i] == 0) {
                 numIsPrime = false;
                 break;
             }
