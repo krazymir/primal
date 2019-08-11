@@ -55,7 +55,7 @@ app.post('/values', async (req, res)=> {
         return res.status(422).send('Index too ' + (index > keys.maxIndex ? 'high' : 'low'));
     }
 
-    redisClient.hset('values', index, 'Calculating');
+    redisClient.hset('values', index, 'being calculated');
     redisPublisher.publish('insert', index);
     pgClient.query('INSERT INTO known_values(numbers) VALUES($1)', [index]);
     res.send({ working: true });
