@@ -52,7 +52,7 @@ class Primal extends Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <label>Index of the prime:</label>
-                    <imput 
+                    <imput type="text"
                     value={this.state.index}
                     onChange={event => this.setState({ index: event.target.value })}
                     />
