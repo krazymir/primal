@@ -21,3 +21,17 @@ after_success:
   - docker push krazymir/primal-nginx
   - docker push krazymir/primal-server
   - docker push krazymir/primal-worker
+  
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "primal"
+  env: "Primal-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-730503576789"
+  bucket_path: "Docker-primal"
+  on:
+    branch: master
+  access_key_id: 
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
