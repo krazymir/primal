@@ -35,3 +35,5 @@ deploy:
     secure: $AWS_ACCESS_KEY
   secret_access_key:
     secure: $AWS_SECRET_KEY
+notifications:
+  webhooks: https://outlook.office.com/webhook/74b2da1b-0e91-4cd5-b7f7-5e1d134848c9@204cb148-e6fd-421f-825f-cabf6a4a4a55/TravisCI/e12b29cbbc6f42dcb52b0100fa2a1bdd/035d09a8-0490-49f2-ab77-7a7a55b340b0
